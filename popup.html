@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyMate AI</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for premium typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="popup-body">
+    <!-- Main glass card container -->
+    <div class="glass-container">
+        <!-- Header -->
+        <header class="popup-header">
+            <div class="logo-area">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="logo-icon"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <div class="brand">
+                    <h1>StudyMate AI</h1>
+                    <span class="subtitle">Reading & Learning Assistant</span>
+                </div>
+            </div>
+            <button id="settings-btn" class="icon-btn" title="Open Settings">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            </button>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tab-nav">
+            <button class="tab-link active" data-tab="tab-read">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Read & Learn
+            </button>
+            <button class="tab-link" data-tab="tab-tools">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                Study Tools
+            </button>
+            <button class="tab-link" data-tab="tab-library">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                Highlights
+            </button>
+        </nav>
+
+        <!-- Tab Contents -->
+        <main class="tab-content">
+            <!-- TAB 1: READ & LEARN -->
+            <section id="tab-read" class="tab-panel active">
+                <div class="form-group">
+                    <label for="text-source">Source Content</label>
+                    <select id="text-source" class="glass-select">
+                        <option value="selection">Selected Text on Page</option>
+                        <option value="page">Current Page (Full Article)</option>
+                        <option value="custom">Paste Custom Text</option>
+                    </select>
+                </div>
+
+                <div id="custom-text-wrapper" class="form-group hidden">
+                    <textarea id="custom-text-input" class="glass-textarea" placeholder="Paste your text here to analyze..."></textarea>
+                </div>
+                
+                <div id="selection-info-box" class="info-badge-box">
+                    <span id="selection-status-text">No text selected. Select text on page or switch to 'Full Article'.</span>
+                </div>
+
+                <div class="feature-selection-grid">
+                    <div class="form-group flex-1">
+                        <label for="feature-group">Feature</label>
+                        <select id="feature-group" class="glass-select">
+                            <option value="summarize">AI Smart Summary</option>
+                            <option value="explain">Explain Text</option>
+                            <option value="translate">Translate Text</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group flex-1">
+                        <label for="feature-option">Type / Style</label>
+                        <select id="feature-option" class="glass-select">
+                            <!-- Options populated dynamically based on feature-group -->
+                        </select>
+                    </div>
+                </div>
+
+                <button id="generate-btn" class="btn primary-gradient-btn">
+                    <span>Analyze with AI</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-arrow"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+            </section>
+
+            <!-- TAB 2: STUDY TOOLS -->
+            <section id="tab-tools" class="tab-panel">
+                <div class="tools-grid">
+                    <!-- Notes Card -->
+                    <button class="tool-card" id="tool-notes">
+                        <div class="tool-icon notes-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        </div>
+                        <div class="tool-details">
+                            <h3>AI Notes Generator</h3>
+                            <p>Generate highly structured study summaries from current text.</p>
+                        </div>
+                    </button>
+
+                    <!-- Flashcard Card -->
+                    <button class="tool-card" id="tool-flashcards">
+                        <div class="tool-icon flashcard-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                        </div>
+                        <div class="tool-details">
+                            <h3>Flashcard Maker</h3>
+                            <p>Create Q&A styled flashcards for learning retention.</p>
+                        </div>
+                    </button>
+
+                    <!-- Quiz Card -->
+                    <button class="tool-card" id="tool-quiz">
+                        <div class="tool-icon quiz-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        </div>
+                        <div class="tool-details">
+                            <h3>Quiz Generator</h3>
+                            <p>Generate MCQ quizzes with answer options & explanations.</p>
+                        </div>
+                    </button>
+
+                    <!-- Copy Clean -->
+                    <div class="tool-clean-card">
+                        <div class="clean-header">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="clean-icon"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                            <h3>Copy Clean Tool</h3>
+                        </div>
+                        <textarea id="clean-text-input" class="glass-textarea-small" placeholder="Paste messy text with extra spaces, breaks, etc..."></textarea>
+                        <button id="clean-copy-btn" class="btn secondary-btn btn-sm">Clean & Copy to Clipboard</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: HIGHLIGHTS -->
+            <section id="tab-library" class="tab-panel">
+                <div class="library-header">
+                    <h2>Saved Highlights</h2>
+                    <button id="clear-highlights-btn" class="text-danger-btn">Clear All</button>
+                </div>
+                <div class="highlights-list" id="highlights-container">
+                    <!-- Highlights loaded via JS -->
+                </div>
+            </section>
+        </main>
+
+        <!-- RESULT VIEWER CONTAINER (Slides up when AI result is ready or loading) -->
+        <div id="result-viewer" class="result-slider hidden">
+            <header class="result-header">
+                <button id="close-result-btn" class="back-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    <span>Back</span>
+                </button>
+                <div class="result-badge" id="result-badge-text">Summary</div>
+            </header>
+            
+            <div class="result-scrollable-body" id="result-content-body">
+                <!-- Swapped in by JS: Loader, Error, or Markdown HTML content -->
+            </div>
+
+            <!-- Follow-up input inside result panel -->
+            <div class="result-follow-up-bar" id="result-follow-up-area">
+                <input type="text" id="follow-up-input" placeholder="Ask follow-up question..." />
+                <button id="follow-up-submit-btn" title="Ask AI">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </div>
+            
+            <footer class="result-footer">
+                <button id="result-copy-btn" class="footer-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    Copy
+                </button>
+                <button id="result-save-btn" class="footer-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                    Save Highlight
+                </button>
+                <button id="result-regen-btn" class="footer-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+                    Regenerate
+                </button>
+            </footer>
+        </div>
+
+        <!-- Custom Toast Notification inside popup -->
+        <div id="popup-toast" class="popup-toast-msg hidden">Success message</div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
